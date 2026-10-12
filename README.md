@@ -2,13 +2,71 @@
 
 **Made by Cubes, Studio.**
 
-YASM is an experimental Scratch-based editor built from the Scratch GUI codebase and modified for TurboWarp. The project is maintained and branded by Cubes, Studio.
+YASM is a Scratch-based editor built from the Scratch GUI codebase and modified for TurboWarp.
 
-Project website: https://cubehub-studio.github.io/YASM/
+- **Editor:** https://cubehub-studio.github.io/YASM/editor.html
+- **Homepage:** https://cubehub-studio.github.io/YASM/
+- **Public projects:** https://github.com/CubeHub-studio/Games-YASM
 
 ---
 
-scratch-gui modified for use in [TurboWarp](https://turbowarp.org/)
+## Contributing to YASM
+
+Contributions are welcome! You can help by fixing bugs, improving the interface, refining accessibility, updating documentation, or proposing useful features. Please keep changes focused and explain what they improve.
+
+### Before you start
+
+1. Check the existing [issues](https://github.com/CubeHub-studio/YASM/issues) and [pull requests](https://github.com/CubeHub-studio/YASM/pulls) to avoid duplicating work.
+2. For a significant change, open an issue first to discuss the approach.
+3. Be respectful in discussions and only submit work you have the right to contribute.
+
+### Set up a development copy
+
+You will need Git and a compatible Node.js version. From a terminal:
+
+```bash
+git clone https://github.com/CubeHub-studio/YASM.git
+cd YASM
+npm install
+npm start
+```
+
+Open the local address printed by the development server in your browser. The project is based on TurboWarp's Scratch GUI, so its [development guide](https://docs.turbowarp.org/development/getting-started) is useful for environment details.
+
+### Make and test your change
+
+1. Create a branch for your work (for example, `fix/settings-layout`).
+2. Make the smallest coherent change that solves the problem.
+3. Run `npm run test:lint` for lint checks. Run relevant tests when practical; `npm test` runs the project's full test/build suite and may take longer.
+4. Check your change in the local editor, including a narrow/mobile-sized window if the interface changed.
+5. Update documentation when behavior or setup instructions change.
+
+### Submit a pull request
+
+1. Push your branch to your fork of the repository.
+2. Open a pull request targeting the `develop` branch.
+3. Describe the problem, your solution, and how you tested it. Include screenshots for visible UI changes and link related issues.
+4. Keep the pull request focused, and be prepared to make revisions after review.
+
+If you cannot or do not want to code, you can still contribute by reporting a reproducible bug, suggesting an improvement, or improving the documentation.
+
+### Publishing projects for the homepage
+
+YASM's public project gallery reads projects from [Games-YASM](https://github.com/CubeHub-studio/Games-YASM). Each project should live in its own folder and include:
+
+- One `.sb3` project file.
+- A `metadata.json` file containing a project name and description, for example:
+
+```json
+{
+  "name": "My Project",
+  "desc": "A short description of what it does."
+}
+```
+
+- Optionally, an `icon.png` image for the project card.
+
+Use a clear folder name, make sure you have permission to publish all included assets, and test the project before submitting it. The homepage discovers folders with valid metadata and an `.sb3` file; published projects then receive **Open in YASM** and **Download** links.
 
 ## Setup
 
