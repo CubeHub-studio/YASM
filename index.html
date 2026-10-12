@@ -178,13 +178,13 @@
             const metaResponse = await fetch(`${rawBase}/${rawPath(metadataFile.path)}`);
             if (!metaResponse.ok) return null;
             const metadata = await metaResponse.json();
-            const iconFile = files.find(entry => entry.path === `${folder}/icon.png`);
+            const cardFile = files.find(entry => entry.path === `${folder}/card.png`);
             const projectPath = rawPath(file.path);
             return {
               name: metadata.name || folder.split("/").pop(),
               desc: metadata.desc || "A project published for YASM.",
               projectUrl: `${rawBase}/${projectPath}`,
-              iconUrl: iconFile ? `${rawBase}/${rawPath(iconFile.path)}` : null
+              cardUrl: cardFile ? `${rawBase}/${rawPath(cardFile.path)}` : null
             };
           } catch (_) {
             return null;
@@ -202,10 +202,10 @@
           const card = document.createElement("article");
           card.className = "card project-card";
 
-          if (project.iconUrl) {
+          if (project.cardUrl) {
             const art = document.createElement("img");
             art.className = "project-art";
-            art.src = project.iconUrl;
+            art.src = project.cardUrl;
             art.alt = "";
             art.loading = "lazy";
             card.append(art);
