@@ -62,7 +62,7 @@ Create one folder per project. For example:
 MyProject/
 ├── game.sb3
 ├── metadata.json
-└── icon.png       (optional)
+└── card.png       (optional)
 ```
 
 - `game.sb3` — the Scratch-compatible project file. One `.sb3` file is required in the folder.
@@ -75,7 +75,7 @@ MyProject/
 }
 ```
 
-- `icon.png` — optional project thumbnail. Use a square image for the best appearance.
+- `card.png` — optional project card artwork. This image fills the public project card, so use artwork that looks good in a wide card layout.
 
 Use a clear folder name. Test the project in YASM and only include artwork, audio, code, and other assets that you have permission to publish.
 
