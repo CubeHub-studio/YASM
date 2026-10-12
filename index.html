@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6c4cf1">
+  <meta name="description" content="YASM — Yet Another Scratch Mod. A community-driven Scratch GUI modification from CubeHub Studio.">
+  <title>YASM — Yet Another Scratch Mod</title>
+  <style>
+    :root{color-scheme:dark;--bg:#101020;--panel:#191a31;--text:#f7f5ff;--muted:#b9b6d5;--purple:#987cff;--cyan:#63e6e2;--border:#343452}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:radial-gradient(ellipse at 50% -15%,#382768 0,transparent 55%),var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    a{color:inherit}
+    .wrap{width:min(1100px,calc(100% - 40px));margin:auto}
+    header{padding:22px 0;border-bottom:1px solid #ffffff14}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-weight:800;font-size:1.15rem;letter-spacing:.02em}
+    .logo{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--purple),#6341d8);box-shadow:0 7px 24px #7656e64a;font-size:1.4rem}
+    .navlinks{display:flex;gap:20px;flex-wrap:wrap}
+    .navlinks a{color:var(--muted);text-decoration:none;font-size:.94rem}
+    .navlinks a:hover{color:white}
+    .hero{padding:100px 0 82px;text-align:center}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:6px 13px;border:1px solid #987cff66;background:#987cff15;border-radius:999px;color:#d9ceff;font-size:.85rem;font-weight:650}
+    h1{font-size:clamp(2.8rem,8vw,5.6rem);line-height:1.04;letter-spacing:-.065em;margin:25px 0 20px}
+    h1 span{background:linear-gradient(90deg,#c6b6ff,var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{max-width:680px;margin:0 auto;color:var(--muted);font-size:clamp(1.05rem,2.3vw,1.25rem)}
+    .actions{display:flex;justify-content:center;gap:13px;flex-wrap:wrap;margin-top:32px}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:12px 19px;border-radius:12px;text-decoration:none;font-weight:750;border:1px solid var(--border);transition:transform .18s,background .18s}
+    .button:hover{transform:translateY(-2px)}
+    .primary{background:var(--purple);color:#fff;border-color:transparent}
+    .secondary{background:#ffffff08}
+    .note{margin-top:18px;color:#918eaf;font-size:.88rem}
+    .section{padding:58px 0}
+    .section-head{text-align:center;margin-bottom:30px}
+    h2{font-size:clamp(1.8rem,4vw,2.5rem);line-height:1.2;letter-spacing:-.035em;margin:0 0 10px}
+    .section-head p{color:var(--muted);margin:0}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .card{background:linear-gradient(155deg,#20213b,#17182b);border:1px solid var(--border);border-radius:18px;padding:24px}
+    .icon{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:#987cff20;font-size:1.45rem;margin-bottom:16px}
+    .card h3{margin:0 0 8px;font-size:1.1rem}
+    .card p{margin:0;color:var(--muted);font-size:.96rem}
+    .callout{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px;border-radius:20px;border:1px solid #63e6e244;background:linear-gradient(110deg,#1b2b3a,#1c1934)}
+    .callout p{color:var(--muted);margin:7px 0 0}
+    .callout h2{font-size:1.6rem}
+    code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#090914;padding:3px 7px;border-radius:6px;color:#cfc4ff}
+    footer{margin-top:70px;padding:26px 0;border-top:1px solid #ffffff14;color:#9996b5;font-size:.9rem}
+    footer .foot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    @media(max-width:760px){.hero{padding:72px 0 60px}.grid{grid-template-columns:1fr}.callout{align-items:flex-start;flex-direction:column}.navlinks{gap:12px}.wrap{width:min(100% - 28px,1100px)}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Main navigation">
+      <a class="brand" href="#top"><span class="logo" aria-hidden="true">Y</span><span>YASM</span></a>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#get-started">Get started</a>
+        <a href="https://github.com/CubeHub-studio/YASM">Source code ↗</a>
+      </div>
+    </nav>
+  </header>
+  <main id="top">
+    <section class="hero wrap">
+      <div class="eyebrow"><span aria-hidden="true">✦</span> A CubeHub Studio project</div>
+      <h1>Meet <span>YASM.</span></h1>
+      <p class="lead">Yet Another Scratch Mod — an experimental take on the Scratch 3.0 editor, built from the Scratch GUI codebase and modified for TurboWarp.</p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/CubeHub-studio/YASM">⌘ View source on GitHub</a>
+        <a class="button secondary" href="https://docs.turbowarp.org/development/getting-started">Read the setup guide ↗</a>
+      </div>
+      <p class="note">Free and open source · Made for experimenting and creating</p>
+    </section>
+    <section class="section wrap" id="about">
+      <div class="section-head">
+        <h2>A familiar foundation. Room to experiment.</h2>
+        <p>YASM is a starting point for exploring how a Scratch-based editor can be customized.</p>
+      </div>
+      <div class="grid" id="features">
+        <article class="card">
+          <div class="icon" aria-hidden="true">🧱</div>
+          <h3>Block-based creativity</h3>
+          <p>Build on the visual programming ideas that make Scratch approachable for beginners and makers.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">🛠️</div>
+          <h3>Made to be modified</h3>
+          <p>Explore the GUI source and develop your own interface changes, experiments, and features.</p>
+        </article>
+        <article class="card">
+          <div class="icon" aria-hidden="true">🚀</div>
+          <h3>TurboWarp ecosystem</h3>
+          <p>Use the TurboWarp development documentation to understand the environment and get set up.</p>
+        </article>
+      </div>
+    </section>
+    <section class="section wrap" id="get-started">
+      <div class="callout">
+        <div>
+          <h2>Want to help shape YASM?</h2>
+          <p>Check out the source code, review the setup instructions, and start experimenting.</p>
+        </div>
+        <a class="button primary" href="https://github.com/CubeHub-studio/YASM">Explore the repository ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="wrap foot">
+      <span>© <span id="year">2026</span> CubeHub Studio · YASM</span>
+      <span>YASM is an independent project and is not affiliated with or endorsed by the Scratch Foundation.</span>
+      <span>See the repository for license details.</span>
+    </div>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
