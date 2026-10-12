@@ -127,6 +127,93 @@
   </footer>
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    (async () => {
+      const grid = document.getElementById("project-grid");
+      const status = document.getElementById("project-status");
+      const owner = "CubeHub-studio";
+      const repo = "Games-YASM";
+      const branch = "main";
+      const api = `https://api.github.com/repos/${owner}/${repo}/contents`;
+      const raw = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}`;
+
+      try {
+        const response = await fetch(api);
+        if (!response.ok) throw new Error("Project list unavailable");
+        const entries = await response.json();
+        const folders = entries.filter(entry => entry.type === "dir" && !entry.name.startsWith("."));
+        const projects = (await Promise.all(folders.map(async folder => {
+          try {
+            const [metaResponse, filesResponse] = await Promise.all([
+              fetch(`${api}/${encodeURIComponent(folder.name)}/metadata.json`),
+              fetch(`${api}/${encodeURIComponent(folder.name)}`)
+            ]);
+            if (!metaResponse.ok || !filesResponse.ok) return null;
+            const metadata = await metaResponse.json();
+            const files = await filesResponse.json();
+            const projectFile = files.find(file => file.type === "file" && file.name.toLowerCase().endsWith(".sb3"));
+            if (!projectFile) return null;
+            return {
+              name: metadata.name || folder.name,
+              desc: metadata.desc || "A project published for YASM.",
+              projectUrl: `${raw}/${encodeURIComponent(folder.name)}/${encodeURIComponent(projectFile.name)}`,
+              iconUrl: files.some(file => file.name === "icon.png") ? `${raw}/${encodeURIComponent(folder.name)}/icon.png` : null
+            };
+          } catch (_) {
+            return null;
+          }
+        }))).filter(Boolean);
+
+        grid.replaceChildren();
+        if (!projects.length) {
+          grid.innerHTML = '<article class="card"><h3>No published projects yet</h3><p>Check back later, or visit the public project repository.</p></article>';
+          status.innerHTML = '<a href="https://github.com/CubeHub-studio/Games-YASM">Browse Games-YASM on GitHub ↗</a>';
+          return;
+        }
+
+        for (const project of projects) {
+          const card = document.createElement("article");
+          card.className = "card";
+          const icon = document.createElement("div");
+          icon.className = "icon";
+          if (project.iconUrl) {
+            const img = document.createElement("img");
+            img.src = project.iconUrl;
+            img.alt = "";
+            img.width = 46;
+            img.height = 46;
+            img.style.cssText = "width:46px;height:46px;object-fit:cover;border-radius:13px";
+            icon.replaceChildren(img);
+          } else {
+            icon.textContent = "🧩";
+          }
+          const title = document.createElement("h3");
+          title.textContent = project.name;
+          const description = document.createElement("p");
+          description.textContent = project.desc;
+          description.style.marginBottom = "18px";
+          const actions = document.createElement("div");
+          actions.className = "actions";
+          actions.style.cssText = "justify-content:flex-start;margin-top:0";
+          const open = document.createElement("a");
+          open.className = "button primary";
+          open.href = `https://cubehub-studio.github.io/YASM/editor.html?project_url=${encodeURIComponent(project.projectUrl)}`;
+          open.textContent = "▶ Open in YASM";
+          const download = document.createElement("a");
+          download.className = "button secondary";
+          download.href = project.projectUrl;
+          download.download = "";
+          download.textContent = "↓ Download";
+          actions.append(open, download);
+          card.append(icon, title, description, actions);
+          grid.append(card);
+        }
+        status.innerHTML = 'Want to publish a project? <a href="https://github.com/CubeHub-studio/Games-YASM">Contribute to Games-YASM ↗</a>';
+      } catch (_) {
+        grid.innerHTML = '<article class="card"><h3>Projects could not be loaded</h3><p>The public project list is temporarily unavailable. You can still browse the repository directly.</p></article>';
+        status.innerHTML = '<a href="https://github.com/CubeHub-studio/Games-YASM">Open Games-YASM on GitHub ↗</a>';
+      }
+    })();
   </script>
 </body>
 </html>
