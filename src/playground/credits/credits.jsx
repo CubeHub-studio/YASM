@@ -64,6 +64,10 @@ const Credits = () => (
                 The {APP_NAME} project is made possible by the work of many volunteers.
             </p>
         </section>
+        <section>
+            <h2>YASM</h2>
+            <p>YASM is made by Cubes, Studio.</p>
+        </section>
         {APP_NAME !== 'TurboWarp' && (
             // Be kind and considerate. Don't remove this :)
             <section>
