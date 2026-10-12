@@ -40,6 +40,18 @@
     .icon{display:grid;place-items:center;width:46px;height:46px;border-radius:13px;background:#987cff20;font-size:1.45rem;margin-bottom:16px}
     .card h3{margin:0 0 8px;font-size:1.1rem}
     .card p{margin:0;color:var(--muted);font-size:.96rem}
+    .project-card{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;min-height:340px;overflow:hidden;padding:0;background:#171326;color:#fff}
+    .project-card::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(135deg,#49317d,#17182b 65%,#164b59)}
+    .project-art{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;opacity:.88;transition:transform .25s ease}
+    .project-card:hover .project-art{transform:scale(1.035)}
+    .project-shade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#09091400 8%,#09091480 45%,#090914f5 100%)}
+    .project-copy{padding:24px 24px 18px;color:#fff;text-shadow:0 2px 12px #000b}
+    .project-card h3{font-size:1.55rem;line-height:1.2;letter-spacing:-.025em;margin:0 0 8px;color:#fff}
+    .project-card p{color:#fff;font-size:.96rem;line-height:1.5}
+    .project-actions{display:flex;gap:10px;flex-wrap:wrap;padding:0 24px 24px}
+    .project-actions .button{box-shadow:0 3px 14px #0005}
+    .project-actions .secondary{background:#111020d9;border-color:#ffffff80;color:#fff;backdrop-filter:blur(8px)}
+    .project-actions .primary{background:#fff;color:#24134c;border-color:#fff}
     .callout{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px;border-radius:20px;border:1px solid #63e6e244;background:linear-gradient(110deg,#1b2b3a,#1c1934)}
     .callout p{color:var(--muted);margin:7px 0 0}
     .callout h2{font-size:1.6rem}
@@ -188,31 +200,30 @@
 
         for (const project of projects) {
           const card = document.createElement("article");
-          card.className = "card";
-          const icon = document.createElement("div");
-          icon.className = "icon";
-          if (project.iconUrl) {
-            const img = document.createElement("img");
-            img.src = project.iconUrl;
-            img.alt = "";
-            img.width = 46;
-            img.height = 46;
-            img.loading = "lazy";
-            img.style.cssText = "width:46px;height:46px;object-fit:cover;border-radius:13px";
-            icon.replaceChildren(img);
-          } else {
-            icon.textContent = "🧩";
-          }
+          card.className = "card project-card";
 
+          if (project.iconUrl) {
+            const art = document.createElement("img");
+            art.className = "project-art";
+            art.src = project.iconUrl;
+            art.alt = "";
+            art.loading = "lazy";
+            card.append(art);
+          }
+          const shade = document.createElement("div");
+          shade.className = "project-shade";
+          shade.setAttribute("aria-hidden", "true");
+
+          const copy = document.createElement("div");
+          copy.className = "project-copy";
           const title = document.createElement("h3");
           title.textContent = project.name;
           const description = document.createElement("p");
           description.textContent = project.desc;
-          description.style.marginBottom = "18px";
+          copy.append(title, description);
 
           const actions = document.createElement("div");
-          actions.className = "actions";
-          actions.style.cssText = "justify-content:flex-start;margin-top:0";
+          actions.className = "project-actions";
           const open = document.createElement("a");
           open.className = "button primary";
           open.href = `https://cubehub-studio.github.io/YASM/editor.html?project_url=${encodeURIComponent(project.projectUrl)}`;
@@ -223,7 +234,7 @@
           download.download = "";
           download.textContent = "↓ Download";
           actions.append(open, download);
-          card.append(icon, title, description, actions);
+          card.append(shade, copy, actions);
           grid.append(card);
         }
 
