@@ -84,7 +84,7 @@ Use a clear folder name. Test the project in YASM and only include artwork, audi
 1. Open [Games-YASM](https://github.com/CubeHub-studio/Games-YASM) and fork the repository.
 2. Add your project folder and its files to your fork.
 3. Commit and push your changes.
-4. Open a pull request targeting the `main` branch of `CubeHub-studio/Games-YASM`.
+4. Open a pull request targeting the `master` branch of `CubeHub-studio/Games-YASM`.
 5. In the pull request, briefly describe the project and confirm that you have permission to publish its assets.
 
 After the pull request is reviewed and merged, the YASM homepage discovers the folder automatically. The project card provides **Open in YASM** and **Download** links. You do not need to edit YASM's homepage to add a project.
