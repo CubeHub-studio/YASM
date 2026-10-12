@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="YASM">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="YASM">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#a58bff"/>
-      <stop offset="1" stop-color="#5630c8"/>
+    <linearGradient id="yasmPurple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a78bfa"/>
+      <stop offset="1" stop-color="#6d28d9"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <path d="M104 112h91l61 105 61-105h91L296 292v108h-80V292z" fill="#fff"/>
+  <rect x="1" y="1" width="46" height="46" rx="13" fill="url(#yasmPurple)"/>
+  <path d="M12 11h8l4 9 4-9h8L28 28v9h-8v-9z" fill="#fff"/>
 </svg>
