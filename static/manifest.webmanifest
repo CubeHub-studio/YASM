@@ -1,21 +1,21 @@
 {
-  "short_name": "TurboWarp",
-  "name": "TurboWarp",
-  "description": "Mod of Scratch 3 with a compiler, dark mode, and more features.",
+  "short_name": "YASM",
+  "name": "YASM — Yet Another Scratch Mod",
+  "description": "YASM — Yet Another Scratch Mod.",
   "icons": [
     {
-      "src": "images/192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "images/yasm-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
     },
     {
-      "src": "images/512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "images/yasm-icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
     }
   ],
   "start_url": "editor",
   "background_color": "#333333",
   "display": "standalone",
-  "theme_color": "#333333"
+  "theme_color": "#6c4cf1"
 }
