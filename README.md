@@ -1,3 +1,13 @@
+# YASM — Yet Another Scratch Mod
+
+**Made by Cubes, Studio.**
+
+YASM is an experimental Scratch-based editor built from the Scratch GUI codebase and modified for TurboWarp. The project is maintained and branded by Cubes, Studio.
+
+Project website: https://cubehub-studio.github.io/YASM/
+
+---
+
 scratch-gui modified for use in [TurboWarp](https://turbowarp.org/)
 
 ## Setup
