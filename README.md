@@ -50,12 +50,23 @@ Open the local address printed by the development server in your browser. The pr
 
 If you cannot or do not want to code, you can still contribute by reporting a reproducible bug, suggesting an improvement, or improving the documentation.
 
-### Publishing projects for the homepage
+### Publishing a project to the homepage
 
-YASM's public project gallery reads projects from [Games-YASM](https://github.com/CubeHub-studio/Games-YASM). Each project should live in its own folder and include:
+YASM's public gallery automatically lists projects from the public [Games-YASM repository](https://github.com/CubeHub-studio/Games-YASM). To publish a project, submit it to that repository in a pull request.
 
-- One `.sb3` project file.
-- A `metadata.json` file containing a project name and description, for example:
+#### 1. Prepare your project folder
+
+Create one folder per project. For example:
+
+```text
+MyProject/
+├── game.sb3
+├── metadata.json
+└── icon.png       (optional)
+```
+
+- `game.sb3` — the Scratch-compatible project file. One `.sb3` file is required in the folder.
+- `metadata.json` — the public name and short description shown on the homepage:
 
 ```json
 {
@@ -64,9 +75,20 @@ YASM's public project gallery reads projects from [Games-YASM](https://github.co
 }
 ```
 
-- Optionally, an `icon.png` image for the project card.
+- `icon.png` — optional project thumbnail. Use a square image for the best appearance.
 
-Use a clear folder name, make sure you have permission to publish all included assets, and test the project before submitting it. The homepage discovers folders with valid metadata and an `.sb3` file; published projects then receive **Open in YASM** and **Download** links.
+Use a clear folder name. Test the project in YASM and only include artwork, audio, code, and other assets that you have permission to publish.
+
+#### 2. Submit it
+
+1. Open [Games-YASM](https://github.com/CubeHub-studio/Games-YASM) and fork the repository.
+2. Add your project folder and its files to your fork.
+3. Commit and push your changes.
+4. Open a pull request targeting the `main` branch of `CubeHub-studio/Games-YASM`.
+5. In the pull request, briefly describe the project and confirm that you have permission to publish its assets.
+
+After the pull request is reviewed and merged, the YASM homepage discovers the folder automatically. The project card provides **Open in YASM** and **Download** links. You do not need to edit YASM's homepage to add a project.
+
 
 ## Setup
 
