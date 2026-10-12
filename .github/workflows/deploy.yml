@@ -38,7 +38,7 @@ jobs:
           ROOT: /YASM/
         run: |
           npm run build
-          cp build/editor.html build/index.html
+          cp index.html build/index.html
           touch build/.nojekyll
 
       - name: Configure GitHub Pages
