@@ -39,6 +39,40 @@ const translateGalleryItem = (extension, locale) => ({
     description: extension.descriptionTranslations[locale] || extension.description
 });
 
+
+// Curated standalone extensions from Gandi IDE's community extension repository.
+// Source: https://github.com/Gandi-IDE/custom-extension/tree/main/extensions
+const fetchGandiLibrary = async () => {
+    const paths = [
+        ['Arkos/advancedControls.js', 'Advanced Controls'],
+        ['Arkos/arkosExtension.js', 'Arkos Extension'],
+        ['Arkos/moreSensing.js', 'More Sensing'],
+        ['Fath/CocreaFetch.js', 'Cocrea Fetch'],
+        ['Fath/comment blocks.js', 'Comment Blocks'],
+        ['FurryR/lpp.js', 'LPP'],
+        ['Project/Project.js', 'Project'],
+        ['QuakeStudio/BetterQuake/BetterQuake.js', 'BetterQuake'],
+        ['dannydev/scCOM.js', 'scCOM'],
+        ['qxsck/data-analysis.js', 'Data Analysis'],
+        ['qxsck/easy-struct.js', 'Easy Struct'],
+        ['qxsck/matrix.js', 'Matrix'],
+        ['qxsck/str-mani.js', 'String Manipulation'],
+        ['qxsck/var-and-list.js', 'Variables and Lists'],
+        ['six-6/datetime.js', 'DateTime'],
+        ['six-6/regexp.js', 'RegExp'],
+        ['wit_cat/FPS.js', 'FPS']
+    ];
+    return paths.map(([path, name]) => ({
+        name,
+        extensionId: `gandi_${path.replace(/[^a-zA-Z0-9]/g, '_')}`,
+        extensionURL: `https://raw.githubusercontent.com/Gandi-IDE/custom-extension/main/extensions/${path.split('/').map(encodeURIComponent).join('/')}`,
+        iconURL: extensionIcon,
+        description: 'Community extension from Gandi IDE. Not created by YASM.',
+        tags: ['gandi'],
+        featured: true
+    }));
+};
+
 let cachedGallery = null;
 
 const fetchLibrary = async () => {
