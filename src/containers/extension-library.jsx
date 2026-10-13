@@ -47,30 +47,34 @@ const fetchGandiLibrary = async () => {
         ['Arkos/advancedControls.js', 'Advanced Controls', 'Arkos/assets/advanced_control_cover.png'],
         ['Arkos/arkosExtension.js', 'Arkos Extension', 'Arkos/assets/cover1.png'],
         ['Arkos/moreSensing.js', 'More Sensing', 'Arkos/assets/cover2.png'],
-        ['Fath/CocreaFetch.js', 'Cocrea Fetch'],
-        ['Fath/comment blocks.js', 'Comment Blocks'],
+        ['Fath/CocreaFetch.js', 'Cocrea Fetch', 'Fath/assets/CocreaFetch.png'],
+        ['Fath/comment blocks.js', 'Comment Blocks', 'Fath/banners/CommentBlocks.png'],
         ['FurryR/lpp.js', 'LPP'],
-        ['Project/Project.js', 'Project'],
-        ['QuakeStudio/BetterQuake/BetterQuake.js', 'BetterQuake'],
+        ['Project/Project.js', 'Project', 'Project/Project.svg'],
+        ['QuakeStudio/BetterQuake/BetterQuake.js', 'BetterQuake', 'QuakeStudio/assets/banner.png'],
         ['dannydev/scCOM.js', 'scCOM'],
         ['qxsck/data-analysis.js', 'Data Analysis'],
         ['qxsck/easy-struct.js', 'Easy Struct'],
         ['qxsck/matrix.js', 'Matrix'],
         ['qxsck/str-mani.js', 'String Manipulation'],
         ['qxsck/var-and-list.js', 'Variables and Lists'],
-        ['six-6/datetime.js', 'DateTime'],
+        ['six-6/datetime.js', 'DateTime', 'six-6/DateTimePost.svg'],
         ['six-6/regexp.js', 'RegExp'],
         ['wit_cat/FPS.js', 'FPS']
     ];
-    return paths.map(([path, name, cover]) => ({
+    return paths.map(([path, name, cover]) => {
+        const baseURL = 'https://raw.githubusercontent.com/Gandi-IDE/custom-extension/main/extensions/';
+        return {
         name,
         extensionId: `gandi_${path.replace(/[^a-zA-Z0-9]/g, '_')}`,
-        extensionURL: `https://raw.githubusercontent.com/Gandi-IDE/custom-extension/main/extensions/${path.split('/').map(encodeURIComponent).join('/')}`,
-        iconURL: cover ? `https://raw.githubusercontent.com/Gandi-IDE/custom-extension/main/extensions/${cover.split('/').map(encodeURIComponent).join('/')}` : extensionIcon,
+        extensionURL: `${baseURL}${path.split('/').map(encodeURIComponent).join('/')}`,
+        // Use repository artwork as the large featured image above the title/description.
+        iconURL: cover ? `${baseURL}${cover.split('/').map(encodeURIComponent).join('/')}` : extensionIcon,
         description: 'Community extension from Gandi IDE. Not created by YASM.',
         tags: ['gandi'],
         featured: true
-    }));
+        };
+    });
 };
 
 let cachedGallery = null;
