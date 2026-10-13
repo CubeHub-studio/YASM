@@ -3,5 +3,5 @@ export default [
     {tag: 'scratch', intlLabel: 'Scratch'},
     {tag: 'tw', intlLabel: 'TurboWarp'},
     {tag: 'yasm', intlLabel: 'YASM'},
-    {tag: 'gandi', intlLabel: 'Gandi IDE Comunnity'}
+    {tag: 'gandi', intlLabel: 'Gandi IDE Community'}
 ];
