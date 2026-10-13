@@ -2,5 +2,6 @@
 export default [
     {tag: 'scratch', intlLabel: 'Scratch'},
     {tag: 'tw', intlLabel: 'TurboWarp'},
-    {tag: 'yasm', intlLabel: 'YASM'}
+    {tag: 'yasm', intlLabel: 'YASM'},
+    {tag: 'gandi', intlLabel: 'Gandi IDE Comunnity'}
 ];
