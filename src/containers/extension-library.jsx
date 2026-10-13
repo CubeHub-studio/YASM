@@ -126,11 +126,15 @@ class ExtensionLibrary extends React.PureComponent {
         ]);
         this.state = {
             gallery: cachedGallery,
+            gandiGallery: null,
             galleryError: null,
             galleryTimedOut: false
         };
     }
     componentDidMount () {
+        fetchGandiLibrary()
+            .then(gandiGallery => this.setState({gandiGallery}))
+            .catch(error => log.error(error));
         if (!this.state.gallery) {
             const timeout = setTimeout(() => {
                 this.setState({
@@ -195,6 +199,10 @@ class ExtensionLibrary extends React.PureComponent {
         if (this.state.gallery || this.state.galleryError || this.state.galleryTimedOut) {
             library = extensionLibraryContent.map(toLibraryItem);
             library.push('---');
+            if (this.state.gandiGallery) {
+                library.push(...this.state.gandiGallery);
+                library.push('---');
+            }
             if (this.state.gallery) {
                 library.push(toLibraryItem(galleryMore));
                 const locale = this.props.intl.locale;
