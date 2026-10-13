@@ -43,38 +43,64 @@ const translateGalleryItem = (extension, locale) => ({
 // Curated standalone extensions from Gandi IDE's community extension repository.
 // Source: https://github.com/Gandi-IDE/custom-extension/tree/main/extensions
 const fetchGandiLibrary = async () => {
+    const baseURL = 'https://raw.githubusercontent.com/Gandi-IDE/custom-extension/main/extensions/';
+    // Use each extension's real ID. The VM selects the loaded category by this ID.
     const paths = [
-        ['Arkos/advancedControls.js', 'Advanced Controls', 'Arkos/assets/advanced_control_cover.png'],
-        ['Arkos/arkosExtension.js', 'Arkos Extension', 'Arkos/assets/cover1.png'],
-        ['Arkos/moreSensing.js', 'More Sensing', 'Arkos/assets/cover2.png'],
-        ['Fath/CocreaFetch.js', 'Cocrea Fetch', 'Fath/assets/CocreaFetch.png'],
-        ['Fath/comment blocks.js', 'Comment Blocks', 'Fath/banners/CommentBlocks.png'],
-        ['FurryR/lpp.js', 'LPP'],
-        ['Project/Project.js', 'Project', 'Project/Project.svg'],
-        ['QuakeStudio/BetterQuake/BetterQuake.js', 'BetterQuake', 'QuakeStudio/assets/banner.png'],
-        ['dannydev/scCOM.js', 'scCOM'],
-        ['qxsck/data-analysis.js', 'Data Analysis'],
-        ['qxsck/easy-struct.js', 'Easy Struct'],
-        ['qxsck/matrix.js', 'Matrix'],
-        ['qxsck/str-mani.js', 'String Manipulation'],
-        ['qxsck/var-and-list.js', 'Variables and Lists'],
-        ['six-6/datetime.js', 'DateTime', 'six-6/DateTimePost.svg'],
-        ['six-6/regexp.js', 'RegExp'],
-        ['wit_cat/FPS.js', 'FPS']
+        ['Arkos/advancedControls.js', 'Advanced Controls', 'advancedControls', 'Arkos/assets/advanced_control_cover.png'],
+        ['Arkos/arkosExtension.js', 'Arkos Extension', 'hcnTest', 'Arkos/assets/cover1.png'],
+        ['Arkos/moreSensing.js', 'More Sensing', 'moreSensing', 'Arkos/assets/cover2.png'],
+        ['Fath/CocreaFetch.js', 'Cocrea Fetch', 'cocreaFetch', 'Fath/assets/CocreaFetch.png'],
+        ['Fath/comment blocks.js', 'Comment Blocks', 'lmscomments', 'Fath/banners/CommentBlocks.png'],
+        ['FurryR/lpp.js', 'LPP', 'lpp'],
+        ['Project/Project.js', 'Project', 'Project0832', 'Project/Project.svg'],
+        ['QuakeStudio/BetterQuake/BetterQuake.js', 'BetterQuake', 'BetterQuake', 'QuakeStudio/assets/banner.png'],
+        ['dannydev/scCOM.js', 'scCOM', 'DannyDevNet'],
+        ['qxsck/data-analysis.js', 'Data Analysis', 'qxsckdataanalysis'],
+        ['qxsck/easy-struct.js', 'Easy Struct', 'qxsckeasystruct'],
+        ['qxsck/matrix.js', 'Matrix', 'qxsckmatrix'],
+        ['qxsck/str-mani.js', 'String Manipulation', 'strmani'],
+        ['qxsck/var-and-list.js', 'Variables and Lists', 'qxsckvarandlist'],
+        ['six-6/datetime.js', 'DateTime', 'DateTime', 'six-6/DateTimePost.svg'],
+        ['six-6/regexp.js', 'RegExp', 'RegExpVI'],
+        ['wit_cat/FPS.js', 'FPS', 'WitCatFPS']
     ];
-    return paths.map(([path, name, cover]) => {
-        const baseURL = 'https://raw.githubusercontent.com/Gandi-IDE/custom-extension/main/extensions/';
+
+    const getEmbeddedCover = source => {
+        // Some community extensions ship their cover as a data URI inside the
+        // extension file rather than as a separate image asset.
+        const candidates = [
+            /(?:const|let|var)\\s+(?:cover|banner|_picture|witcat_fps_picture)\\s*=\\s*(['"])(data:image\\/[^'"]+)\\1/,
+            /(?:const|let|var)\\s+(?:icon|Icon|icon_default|insetIcon|_icon|witcat_fps_icon)\\s*=\\s*(['"])(data:image\\/[^'"]+)\\1/
+        ];
+        for (const pattern of candidates) {
+            const match = source.match(pattern);
+            if (match) return match[2];
+        }
+        return null;
+    };
+
+    return Promise.all(paths.map(async ([path, name, extensionId, cover]) => {
+        let iconURL = cover ? `${baseURL}${cover.split('/').map(encodeURIComponent).join('/')}` : extensionIcon;
+        if (!cover) {
+            try {
+                const response = await fetch(`${baseURL}${path.split('/').map(encodeURIComponent).join('/')}`);
+                if (response.ok) {
+                    iconURL = getEmbeddedCover(await response.text()) || extensionIcon;
+                }
+            } catch (error) {
+                // A missing artwork request should not prevent the gallery opening.
+            }
+        }
         return {
-        name,
-        extensionId: `gandi_${path.replace(/[^a-zA-Z0-9]/g, '_')}`,
-        extensionURL: `${baseURL}${path.split('/').map(encodeURIComponent).join('/')}`,
-        // Use repository artwork as the large featured image above the title/description.
-        iconURL: cover ? `${baseURL}${cover.split('/').map(encodeURIComponent).join('/')}` : extensionIcon,
-        description: 'Community extension from Gandi IDE. Not created by YASM.',
-        tags: ['gandi'],
-        featured: true
+            name,
+            extensionId,
+            extensionURL: `${baseURL}${path.split('/').map(encodeURIComponent).join('/')}`,
+            iconURL,
+            description: 'Community extension from Gandi IDE. Compatibility with YASM may vary.',
+            tags: ['gandi'],
+            featured: true
         };
-    });
+    }));
 };
 
 let cachedGallery = null;
