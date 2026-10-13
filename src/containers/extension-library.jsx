@@ -52,7 +52,7 @@ const fetchGandiLibrary = async () => {
         ['Fath/CocreaFetch.js', 'Cocrea Fetch', 'cocreaFetch', 'Fath/assets/CocreaFetch.png'],
         ['Fath/comment blocks.js', 'Comment Blocks', 'lmscomments', 'Fath/banners/CommentBlocks.png'],
         ['FurryR/lpp.js', 'LPP', 'lpp'],
-        ['Project/Project.js', 'Project', 'Project0832', 'Project/Project.svg'],
+        ['Project/Project.js', 'Project', 'Project0832.Project0832', 'Project/Project.svg'],
         ['QuakeStudio/BetterQuake/BetterQuake.js', 'BetterQuake', 'BetterQuake', 'QuakeStudio/assets/banner.png'],
         ['dannydev/scCOM.js', 'scCOM', 'DannyDevNet'],
         ['qxsck/data-analysis.js', 'Data Analysis', 'qxsckdataanalysis'],
@@ -69,8 +69,8 @@ const fetchGandiLibrary = async () => {
         // Some community extensions ship their cover as a data URI inside the
         // extension file rather than as a separate image asset.
         const candidates = [
-            /(?:const|let|var)\\s+(?:cover|banner|_picture|witcat_fps_picture)\\s*=\\s*(['"])(data:image\\/[^'"]+)\\1/,
-            /(?:const|let|var)\\s+(?:icon|Icon|icon_default|insetIcon|_icon|witcat_fps_icon)\\s*=\\s*(['"])(data:image\\/[^'"]+)\\1/
+            /(?:const|let|var)\s+(?:cover|banner|_picture|witcat_fps_picture)\s*=\s*(['"])(data:image\/[^'"]+)\\1/,
+            /(?:const|let|var)\s+(?:icon|Icon|icon_default|insetIcon|_icon|witcat_fps_icon)\s*=\s*(['"])(data:image\/[^'"]+)\\1/
         ];
         for (const pattern of candidates) {
             const match = source.match(pattern);
