@@ -69,8 +69,8 @@ const fetchGandiLibrary = async () => {
         // Some community extensions ship their cover as a data URI inside the
         // extension file rather than as a separate image asset.
         const candidates = [
-            /(?:const|let|var)\s+(?:cover|banner|_picture|witcat_fps_picture)\s*=\s*(['"])(data:image\/[^'"]+)\\1/,
-            /(?:const|let|var)\s+(?:icon|Icon|icon_default|insetIcon|_icon|witcat_fps_icon)\s*=\s*(['"])(data:image\/[^'"]+)\\1/
+            /(?:const|let|var)\s+(?:cover|banner|_picture|witcat_fps_picture)\s*=\s*(['"])(data:image\/[^'"]+)\1/,
+            /(?:const|let|var)\s+(?:icon|Icon|icon_default|insetIcon|_icon|witcat_fps_icon)\s*=\s*(['"])(data:image\/[^'"]+)\1/
         ];
         for (const pattern of candidates) {
             const match = source.match(pattern);
