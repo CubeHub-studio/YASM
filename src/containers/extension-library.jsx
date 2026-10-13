@@ -204,7 +204,7 @@ class ExtensionLibrary extends React.PureComponent {
             library = extensionLibraryContent.map(toLibraryItem);
             library.push('---');
             if (this.state.gandiGallery) {
-                library.push(...this.state.gandiGallery);
+                library.push(...this.state.gandiGallery.map(toLibraryItem));
                 library.push('---');
             }
             if (this.state.gallery) {
