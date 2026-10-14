@@ -212,6 +212,17 @@ class ExtensionLibrary extends React.PureComponent {
         if (!item.disabled) {
             if (this.props.vm.extensionManager.isExtensionLoaded(extensionId)) {
                 this.props.onCategorySelected(extensionId);
+            } else if (item.tags && item.tags.includes('gandi')) {
+                // Gandi's community scripts use window.tempExt, not the
+                // Scratch.extensions.register API required by this loader.
+                // Don't leave the user with a spinner or a misleading
+                // successful selection: explain the actual incompatibility.
+                // eslint-disable-next-line no-alert
+                alert(
+                    'This Gandi IDE community extension is not compatible with YASM yet. ' +
+                    'Its source uses Gandi-specific extension registration/runtime APIs. ' +
+                    'It needs to be adapted before it can load safely in YASM.'
+                );
             } else {
                 this.props.vm.extensionManager.loadExtensionURL(url)
                     .then(() => {
@@ -220,7 +231,7 @@ class ExtensionLibrary extends React.PureComponent {
                     .catch(err => {
                         log.error(err);
                         // eslint-disable-next-line no-alert
-                        alert(err);
+                        alert(err && err.message ? err.message : String(err));
                     });
             }
         }
@@ -248,6 +259,21 @@ class ExtensionLibrary extends React.PureComponent {
             } else {
                 library.push(toLibraryItem(galleryLoading));
             }
+
+            // A community extension can also appear in the built-in or
+            // TurboWarp catalog. Keep the first card and discard repeated IDs
+            // or identical source URLs so a single extension is not shown twice.
+            const seenIds = new Set();
+            const seenURLs = new Set();
+            library = library.filter(item => {
+                if (typeof item === 'string' || !item) return true;
+                const id = item.extensionId;
+                const url = item.extensionURL;
+                if ((id && seenIds.has(id)) || (url && seenURLs.has(url))) return false;
+                if (id) seenIds.add(id);
+                if (url) seenURLs.add(url);
+                return true;
+            });
         }
 
         return (
